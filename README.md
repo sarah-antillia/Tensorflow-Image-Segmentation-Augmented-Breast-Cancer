@@ -1,21 +1,64 @@
-<h2>Tensorflow-Image-Segmentation-Augmented-Breast-Cancer (2024/02/25)</h2>
-
-This is the second experimental Image Segmentation project for Breast-Cancer based on
-the <a href="https://github.com/sarah-antillia/Tensorflow-Image-Segmentation-API">Tensorflow-Image-Segmentation-API</a>, and
+<h2>Tensorflow-Image-Segmentation-Augmented-Breast-Cancer (Updated: 2024/10/20)</h2>
+<li>
+2024/10/20: Retrained Breast-Cancer model by using the latest Tensorflow-Image-Segmentation-API.
+</li>
+<br>
+This is the second experiment for Breast-Cancer Image Segmentation based on
+the latest <a href="https://github.com/sarah-antillia/Tensorflow-Image-Segmentation-API">Tensorflow-Image-Segmentation-API</a>, and
 <a href="https://drive.google.com/file/d/1SafNtMgHlr_0fludiIxpaRNqwA7muQKr/view?usp=sharing">
 BUS-BRA-ImageMask-Dataset.zip</a>.
 <br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/segmentation_samples.png" width="720" height="auto">
 <br>
-
-
-In order to improve segmentation accuracy, we will use an online dataset augmentation strategy based on Python script <a href="./src/ImageMaskAugmentor.py">
-ImageMaskAugmentor.py</a> to train a Pancreas Segmentation Model.<br><br>
 Please see also our first experiment 
 <a href="https://github.com/atlan-antillia/Image-Segmentation-Breast-Cancer">Image-Segmentation-Breast-Cancer</a>
+<br><br>
+<b>Data Augmentation Strategy:</b><br>
+To address the limited size of the Breast-Cancer dataset, we employed an online augmentation tool to enhance segmentation accuracy, which supports the following aumentation methods.
 <br>
+<li>verticalflip</li>
+<li>horizontalflip</li>
+<li>rotation</li>
+<li>shrinks</li>
+<li>shears</li>
+<li>deformation</li>
+<li>distortion</li>
+<li>barreldistortion</li>
+<li>pincushiondistortion</li>
 <br>
-As a first trial, we use the simple UNet Model 
+<hr>
+<b>Actual Image Segmentation for Images of 512x512 pixels</b><br>
+As shown below, the inferred masks look similar to the ground truth masks. <br>
+
+<table>
+<tr>
+<th>Input: image</th>
+<th>Mask (ground_truth)</th>
+<th>Prediction: inferred_mask</th>
+</tr>
+<tr>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0052-r.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0052-r.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0052-r.jpg" width="320" height="auto"></td>
+</tr>
+
+<tr>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0112-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0112-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0112-l.jpg" width="320" height="auto"></td>
+</tr>
+
+<tr>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0117-r.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0117-r.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0117-r.jpg" width="320" height="auto"></td>
+</tr>
+
+</table>
+
+<hr>
+
+<br>
+In this experiment, we used the simple UNet Model 
 <a href="./src/TensorflowUNet.py">TensorflowSlightlyFlexibleUNet</a> for this Breast-Cancer Segmentation.<br>
 As shown in <a href="https://github.com/sarah-antillia/Tensorflow-Image-Segmentation-API">Tensorflow-Image-Segmentation-API</a>.
 you may try other Tensorflow UNet Models:<br>
@@ -25,6 +68,7 @@ you may try other Tensorflow UNet Models:<br>
 <li><a href="./src/TensorflowAttentionUNet.py">TensorflowAttentionUNet.py</a></li>
 <li><a href="./src/TensorflowEfficientUNet.py">TensorflowEfficientUNet.py</a></li>
 <li><a href="./src/TensorflowUNet3Plus.py">TensorflowUNet3Plus.py</a></li>
+<li><a href="./src/TensorflowDeepLabV3Plus.py">TensorflowDeepLabV3Plus.py</a></li>
 <br>
 
 <h3>1. Dataset Citation</h3>
@@ -62,11 +106,7 @@ on the data and is the principal distributor of the BUS-BRA Dataset. In addition
  If you would like to train this Breast-Cancer Segmentation model by yourself,
 please download the dataset from the google drive 
 <a href="https://drive.google.com/file/d/1SafNtMgHlr_0fludiIxpaRNqwA7muQKr/view?usp=sharing">
-BUS-BRA-ImageMask-Dataset.zip</a>.
-
-
-Please see also the <a href="https://github.com/sarah-antillia/BUS-BRA-ImageMask-Dataset">BUS-BRA-ImageMask-Dataset</a>.<br>
-Please expand the downloaded ImageMaskDataset and place them under <b>./dataset</b> folder to be
+BUS-BRA-ImageMask-Dataset.zip</a>, and expand the downloaded ImageMaskDataset and put it under <b>./dataset</b> folder to be
 
 <pre>
 ./dataset
@@ -81,14 +121,20 @@ Please expand the downloaded ImageMaskDataset and place them under <b>./dataset<
         ├─images
         └─masks
 </pre>
+Please see also the <a href="https://github.com/sarah-antillia/BUS-BRA-ImageMask-Dataset">BUS-BRA-ImageMask-Dataset</a>.<br>
  
- 
+<br>
 <b>BUS-BRA Dataset Statistics</b><br>
-<img src ="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/BUS-BRA_Statistics.png" width="512" height="auto"><br>
+<img src ="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/BUS-BRA_Statistics.png" width="512" height="auto"><br>
 
 As shown above, the number of images of train and valid dataset is not necessarily large. Therefore the online dataset augmentation strategy may 
-be effective to improve segmentation accuracy.
-
+be effective to improve segmentation accuracy.<br><br>
+<b>Train_images_sample</b><br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/train_images_sample.png" width="1024" height="auto">
+<br>
+<b>Train_masks_sample</b><br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/train_masks_sample.png" width="1024" height="auto">
+<br>
 <br>
 
 <h3>
@@ -96,171 +142,113 @@ be effective to improve segmentation accuracy.
 3 TensorflowSlightlyFlexibleUNet
 </a>
 </h3>
+
 This <a href="./src/TensorflowUNet.py">TensorflowUNet</a> model is slightly flexibly customizable by a configuration file.<br>
 For example, <b>TensorflowSlightlyFlexibleUNet/Breast-Cancer</b> model can be customizable
-by using <a href="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/train_eval_infer.config">train_eval_infer.config</a>
-<pre>
-; train_eval_infer.config
-; Pancreas, GENERATOR_MODE=True
-; 2024/02/24 (C) antillia.com
-; 2024/02/24 Modified to use 
-; loss           = "bce_dice_loss"
+by using <a href="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/train_eval_infer.config">train_eval_infer.config</a>
 
-[model]
-generator     = True
-image_width    = 512
-image_height   = 512
-image_channels = 3
-num_classes    = 1
-base_filters   = 16
-base_kernels   = (5,5)
-num_layers     = 7
-dropout_rate   = 0.08
-learning_rate  = 0.0001
-clipvalue      = 0.5
-dilation       = (2,2)
-;loss           = "bce_iou_loss"
-loss           = "bce_dice_loss"
-metrics        = ["binary_accuracy"]
-show_summary   = False
-
-[train]
-epochs        = 100
-batch_size    = 4
-steps_per_epoch  = 200
-validation_steps = 100
-patience      = 10
-;metrics       = ["iou_coef", "val_iou_coef"]
-metrics       = ["binary_accuracy", "val_binary_accuracy"]
-model_dir     = "./models"
-eval_dir      = "./eval"
-image_datapath = "../../../dataset/BUS-BRA/train/images/"
-mask_datapath  = "../../../dataset/BUS-BRA/train/masks/"
-create_backup  = False
-learning_rate_reducer = False
-save_weights_only = True
-
-[eval]
-image_datapath = "../../../dataset/BUS-BRA/valid/images/"
-mask_datapath  = "../../../dataset/BUS-BRA/valid/masks/"
-
-[test] 
-image_datapath = "../../../dataset/BUS-BRA/test/images/"
-mask_datapath  = "../../../dataset/BUS-BRA/test/masks/"
-
-[infer] 
-images_dir    = "../../../dataset/BUS-BRA/test/images/"
-output_dir    = "./test_output"
-merged_dir    = "./test_output_merged"
-
-[segmentation]
-colorize      = False
-black         = "black"
-white         = "green"
-blursize      = None
-
-[mask]
-blur      = True
-blur_size = (5,5)
-binarize  = True
-#threshold = 128
-threshold = 74
-
-[generator]
-debug     = True
-augmentation   = True
-
-[augmentor]
-vflip    = False
-hflip    = True
-rotation = True
-angles   = [5, 10,]
-shrinks  = [0.8]
-shears   = [0.2]
-transformer = True
-alpah       = 1300
-sigmoid     = 8
-</pre>
-
-Please note that the online augementor 
-<a href="./src/ImageMaskAugmentor.py">
-ImageMaskAugmentor.py</a> reads the parameters in [generator] and [augmentor] sections, and yields some images and mask depending on the batch_size,
- which are used for each epoch of the training and evaluation process of this UNet Model. 
-<pre>
-[augmentor]
-vflip    = False
-hflip    = True
-rotation = True
-angles   = [5, 10,]
-shrinks  = [0.8]
-shears   = [0.2]
-transformer = True
-alpah       = 1300
-sigmoid     = 8
-</pre>
-Depending on these parameters in [augmentor] section, it will generate hflipped, rotated, shrinked,
-sheared, elastic-transformed images and masks
-from the original images and masks in the folders specified by image_datapath and mask_datapath in 
-[train] and [eval] sections.<br>
-<pre>
-[train]
-image_datapath = "../../../dataset/BUS-BRA/train/images/"
-mask_datapath  = "../../../dataset/BUS-BRA/train/masks/"
-[eval]
-image_datapath = "../../../dataset/BUS-BRA/valid/images/"
-mask_datapath  = "../../../dataset/BUS-BRA/valid/masks/"
-</pre>
-
-For more detail on ImageMaskAugmentor.py, please refer to
-<a href="https://github.com/sarah-antillia/Image-Segmentation-ImageMaskDataGenerator">
-Image-Segmentation-ImageMaskDataGenerator.</a>.
-    
 <br>
 
 <h3>
 3.1 Training
 </h3>
-Please move to a <b>./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer</b> folder,<br>
+Please move to a <b>./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA</b> folder,<br>
 and run the following bat file to train TensorflowUNet model for Breast-Cancer.<br>
 <pre>
 ./1.train_generator.bat
 </pre>
-, which simply runs <a href="./src/TensorflowUNetGeneratorTrainer.py">TensorflowUNetGeneratorTrainer.py </a>
+, which simply runs <a href="./src/TensorflowUNetTrainer.py">TensorflowUNetTrainer.py </a>
 in the following way.
 
 <pre>
-python ../../../src/TensorflowUNetGeneratorTrainer.py ./train_eval_infer.config
-</pre>
-Train console output:<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/train_console_output_at_epoch_54.png" width="720" height="auto"><br>
-Train metrics:<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/train_metrics_at_epoch_54.png" width="720" height="auto"><br>
-Train losses:<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/train_losses_at_epoch_54.png" width="720" height="auto"><br>
-<br>
-The following debug setting is helpful whether your parameters in [augmentor] section are good or not good.
-<pre>
-[generator]
-debug     = True
-</pre>
-You can check the yielded images and mask files used in the actual train-eval process in the following folders under
-<b>./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/</b>.<br> 
-<pre>
-generated_images_dir
-generated_masks_dir
+python ../../../src/TensorflowUNetTrainer.py ./train_eval_infer.config
 </pre>
 
-Sample images in generated_images_dir<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/sample_images_in_generated_images_dir.png"
- width="1024" height="auto"><br>
-Sample masks in generated_masks_dir<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/sample_masks_in_generated_masks_dir.png"
- width="1024" height="auto"><br>
+<b>Model parameters</b><br>
+Defined a small <b>base_filters</b> and large <b>base_kernels</b> for the first Conv Layer of Encoder Block of 
+<a href="./src/TensorflowUNet.py">TensorflowUNet.py</a> 
+and a large num_layers (including a bridge between Encoder and Decoder Blocks).
+<pre>
+[model]
+base_filters   = 16
+base_kernels   = (9,9)
+num_layers     = 8
+dropout_rate   = 0.05
+learning_rate  = 0.00007
+clipvalue      = 0.5
+dilation       = (1,1)
+</pre>
+
+<b>Learning rate</b><br>
+Defined a small learning rate.  
+<pre>
+[model]
+learning_rate  = 0.00007
+</pre>
+
+<b>Online augmentation</b><br>
+Enabled our online augmentation.  
+<pre>
+[model]
+model         = "TensorflowUNet"
+generator     = True
+</pre>
+
+<b>Loss and metrics functions</b><br>
+Specified "bce_dice_loss" and "dice_coef".<br>
+<pre>
+[model]
+loss           = "bce_dice_loss"
+metrics        = ["dice_coef"]
+</pre>
+<b>Learning rate reducer callback</b><br>
+Enabled learing_rate_reducer callback, and a small reducer_patience.
+<pre> 
+[train]
+learning_rate_reducer = True
+reducer_factor     = 0.4
+reducer_patience   = 4
+</pre>
+
+<b>Early stopping callback</b><br>
+Enabled early stopping callback with patience parameter.
+<pre>
+[train]
+patience      = 10
+</pre>
+
+<b>Epoch change inference callbacks</b><br>
+Enabled epoch_change_infer and epoch_changeinfer callbacks.<br>
+<pre>
+[train]
+epoch_change_infer       = True
+epoch_change_infer_dir   =  "./epoch_change_infer"
+epoch_changeinfer        = False
+epoch_changeinfer_dir    = "./epoch_changeinfer"
+num_infer_images         = 6
+</pre>
+
+By using these callbacks, on every epoch_change, the inference procedures can be called
+ for 6 images in <b>mini_test</b> folder. These will help you confirm how the predicted mask changes 
+ at each epoch during your training process.<br> <br> 
+
+<b>Epoch_change_inference output</b><br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/epoch_change_infer.png" width="1024" height="auto"><br>
+<br>
+<br>
+
+Train console output:<br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/train_console_output_at_epoch_44.png" width="720" height="auto"><br>
+Train metrics:<br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/eval/train_metrics.png" width="520" height="auto"><br>
+Train losses:<br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/eval/train_losses.png" width="520" height="auto"><br>
+<br>
 
 <h3>
 3.2 Evaluation
 </h3>
-Please move to a <b>./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer</b> folder,<br>
+Please move to a <b>./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA</b> folder,<br>
 and run the following bat file to evaluate TensorflowUNet model for Breast-Cancer.<br>
 <pre>
 ./2.evaluate.bat
@@ -269,16 +257,19 @@ and run the following bat file to evaluate TensorflowUNet model for Breast-Cance
 python ../../../src/TensorflowUNetEvaluator.py ./train_eval_infer_aug.config
 </pre>
 Evaluation console output:<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/evaluate_console_output_at_epoch_54.png" width="720" height="auto">
-
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/evaluate_console_output_at_epoch_44.png" width="720" height="auto">
+<br><br>
+The loss (bce_dice_loss) to this Ovarian-Tumor/test was low, and dice_coef relatively high as shown below.
+<br>
 <pre>
-Test loss    :0.1155
-Test accuracy:0.9789000153541565</pre>
-
+loss,0.1132
+dice_coef,0.843
+</pre>
+<br>
 <h2>
 3.3 Inference
 </h2>
-Please move to a <b>./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer</b> folder<br>
+Please move to a <b>./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA</b> folder<br>
 ,and run the following bat file to infer segmentation regions for images by the Trained-TensorflowUNet model for Breast-Cancer.<br>
 <pre>
 ./3.infer.bat
@@ -287,84 +278,53 @@ Please move to a <b>./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-C
 python ../../../src/TensorflowUNetInferencer.py ./train_eval_infer_aug.config
 </pre>
 Sample test images<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/sample_test_images.png" width="1024" height="auto"><br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/mini_test_images.png" width="1024" height="auto"><br>
 Sample test mask (ground_truth)<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/sample_test_masks.png" width="1024" height="auto"><br>
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/mini_test_masks.png" width="1024" height="auto"><br>
 
 <br>
 Inferred test masks<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/inferred_test_mask.png" width="1024" height="auto"><br>
-<br>
-Merged test images and inferred masks<br> 
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/asset/merged_test_output.png" width="1024" height="auto"><br> 
+<img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/asset/mini_test_output.png" width="1024" height="auto"><br>
+<b>Enlarged images and masks </b><br>
 
-
-Enlarged samples<br>
 <table>
 <tr>
-<td>
-test/images/0003-l.jpg<br>
-<img src="./dataset/BUS-BRA/test/images/0003-l.jpg" width="512" height="auto">
-
-</td>
-<td>
-Inferred merged/10040_HFH_017.jpg<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/test_output_merged/0003-l.jpg" width="512" height="auto">
-</td> 
+<th>Image</th>
+<th>Mask (ground_truth)</th>
+<th>Inferred-mask</th>
 </tr>
 
 <tr>
-<td>
-test/images/0031-s.jpg<br>
-<img src="./dataset/BUS-BRA/test/images/0031-s.jpg" width="512" height="auto">
-
-</td>
-<td>
-Inferred merged/0031-s.jpg<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/test_output_merged/0031-s.jpg" width="512" height="auto">
-</td> 
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0051-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0051-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0051-l.jpg" width="320" height="auto"></td>
 </tr>
 
-
 <tr>
-<td>
-test/images/0079-l.jpg<br>
-<img src="./dataset/BUS-BRA/test/images/0079-l.jpg" width="512" height="auto">
-
-</td>
-<td>
-Inferred merged/0079-l.jpg<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/test_output_merged/0079-l.jpg" width="512" height="auto">
-</td> 
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0076-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0076-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0076-l.jpg" width="320" height="auto"></td>
 </tr>
 
-
 <tr>
-<td>
-test/images/0112-l.jpg<br>
-<img src="./dataset/BUS-BRA/test/images/0112-l.jpg" width="512" height="auto">
-
-</td>
-<td>
-Inferred merged/0112-l.jpg<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/test_output_merged/0112-l.jpg" width="512" height="auto">
-</td> 
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0112-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0112-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0112-l.jpg" width="320" height="auto"></td>
 </tr>
-
-<!-- 5-->
 <tr>
-<td>
-test/images/0852-s.jpg<br>
-<img src="./dataset/BUS-BRA/test/images/0852-s.jpg" width="512" height="auto">
-
-</td>
-<td>
-Inferred merged/0852-s.jpg<br>
-<img src="./projects/TensorflowSlightlyFlexibleUNet/Augmented-Breast-Cancer/test_output_merged/0852-s.jpg" width="512" height="auto">
-</td> 
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0141-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0141-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0141-l.jpg" width="320" height="auto"></td>
+</tr>
+<tr>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/images/0159-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test/masks/0159-l.jpg" width="320" height="auto"></td>
+<td><img src="./projects/TensorflowSlightlyFlexibleUNet/BUS-BRA/mini_test_output/0159-l.jpg" width="320" height="auto"></td>
 </tr>
 
 </table>
+<hr>
+
 
 <h3>
 References
