@@ -3,11 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# 2024/02/25
-dataset/BUS-BRA/train/
-dataset/BUS-BRA/valid/
+# 2024/10/20
+dataset/
 projects/*/*/models/
-
+projects/*/*/epoch_change_infer/
 projects/*/*/generated_images_dir/
 projects/*/*/generated_masks_dir/
 
